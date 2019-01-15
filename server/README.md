@@ -108,5 +108,7 @@ This app has many things which should be improved:
  - set up tools like mversion, commitizen, ..
  - types with typescript / flow?
  - improve internal logging
+ - use a remote storage of cached audio files so we can horizontally scale without duplicating audio files 
+ - split to lambda functions
  - .. etc
  

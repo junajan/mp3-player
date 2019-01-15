@@ -12,6 +12,7 @@
     "lint": "./node_modules/.bin/eslint src",
     "lint-watch": "./node_modules/.bin/nodemon --exec 'npm run lint'",
     "test": "./node_modules/.bin/mocha --compilers js:@babel/register --recursive spec/**/*.spec.js",
+    "test-watch": "./node_modules/.bin/nodemon --exec 'npm run test'",
     "test-unit": "./node_modules/.bin/mocha --compilers js:@babel/register --recursive spec/unit/**/*.spec.js",
     "test-integration": "n./node_modules/.bin/mocha --compilers js:@babel/register --recursive spec/integration/**/*.spec.js",
     "coverage": "mkdir -p .nyc_output && ./node_modules/.bin/nyc report --reporter=text --reporter=html npm test"
@@ -41,6 +42,7 @@
   "dependencies": {
     "aws-sdk": "^2.387.0",
     "bluebird": "^3.5.3",
+    "chai-http": "^4.2.1",
     "eventemitter3": "^3.1.0",
     "express": "^4.16.4",
     "lodash": "^4.17.11",

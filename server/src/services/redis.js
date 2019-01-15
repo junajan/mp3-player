@@ -5,16 +5,23 @@ bluebird.promisifyAll(redis);
 
 export default class RedisClient {
 	constructor (config) {
-		this.client = redis.createClient(config.redis);
+		this.config = config;
+		this.client = null;
+	}
+
+	_getClient () {
+		if (!this.client)
+			this.client = redis.createClient(this.config.redis);
+		return this.client;
 	}
 
 	async get (key) {
-		const val = await this.client.getAsync(key);
+		const val = await this._getClient().getAsync(key);
 		return JSON.parse(val);
 	}
 
 	async set (key, val) {
 		// stringify in order to handle issues with storing arrays
-		return this.client.setAsync(key, JSON.stringify(val));
+		return this._getClient().setAsync(key, JSON.stringify(val));
 	}
 }

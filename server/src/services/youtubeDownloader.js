@@ -29,6 +29,7 @@ export default class YoutubeDownloader {
 			);
 		});
 	}
+
 	_downloadFile (url, path) {
 		return new Promise((resolve, reject) => {
 			const video = youtubedl(url, [], { cwd: this.tmpDir.name });
@@ -37,6 +38,7 @@ export default class YoutubeDownloader {
 			video.on('error', reject);
 		});
 	}
+
 	async download(code) {
 		const youtubeUrl = this._getYoutubeUrl(code);
 		const filePathMp4 = path.join(this.tmpDir.name, `${code}.mp4`);

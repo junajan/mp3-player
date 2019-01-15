@@ -1,50 +1,47 @@
 import _ from 'lodash';
 import express from 'express';
-import logger from 'morgan';
 import requireDir from 'require-dir';
 import apiRoutes from './routes';
 
-function connectServices(config) {
+function connectServices(config, logger) {
+	// require all services from services dir
 	const serviceModules = requireDir('./services');
-	return _.mapValues(serviceModules, service => new service.default(config));
+
+	// create service objects
+	return _.mapValues(serviceModules, (service, name) => {
+		logger.trace('Building service "%s"', name);
+		return new service.default(config, logger);
+	});
 }
 
-function connectRoutes (app, routes) {
+function connectRoutes (api, routes, logger) {
 	Object.entries(routes).map(([name, route]) => {
 		const [prefix, router] = route;
 
-		console.log('Deploying "%s" with route prefix "%s"', name, prefix);
-		const routerModule = new router(app);
-		app.use(prefix, routerModule.getRoutes());
+		logger.trace('Deploying "%s" with route prefix "%s"', name, prefix);
+		const routerModule = new router(api);
+		api.use(prefix, routerModule.getRoutes());
 
 		return routerModule;
 	});
 }
 
-export default function AppServer (config) {
-	const app = express();
+export default function ApiFactory (config, logger) {
+	const api = express();
 
-	/**
-   * API middlewares
-   */
-	app.use(logger('dev'));
-	app.use(express.json());
+	// Register API middlewares
+	api.use(logger.expressMiddleware);
+	api.use(express.json());
 
-	/**
-   * API configs
-   */
-	app.set('port', config.port);
-	app.set('config', config);
+	// Register common properties
+	api.set('port', config.port);
+	api.set('config', config);
 
-	/**
-   * API services
-   */
-	app.set('services', connectServices(config));
+	// Register services
+	api.set('services', connectServices(config, logger));
 
-	/**
-   * API routes
-   */
-	connectRoutes(app, apiRoutes);
+	// Register API routes
+	connectRoutes(api, apiRoutes, logger);
 
-	return app;
+	return api;
 }

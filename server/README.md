@@ -1,8 +1,8 @@
-# mp3-player-server
-Server side app which downloads songs from youtube, converts them to mp3 and serves them through API routes:
+# MP3 Player server
+Server side app which downloads songs from youtube, converts them to mp3 and serves them through API.
 
 ## Routes
-API has following routes:
+API provides following routes:
  - `/` - returns server name 
  - `/version` - returns version
  - `/ping` - health check ep for loadbalancer 
@@ -11,7 +11,7 @@ API has following routes:
  - `/songs/:id/file` - returns mp3 file of a selected song 
 
 ## Config
-Add `dev.env.json` or `prod.env.json` to `./config` folder:
+Add `dev.env.json` or `prod.env.json` to `./config` folder with following config object:
 ```js
 {
   "port": 3000,
@@ -24,28 +24,46 @@ Add `dev.env.json` or `prod.env.json` to `./config` folder:
 }
 ```
 
-## Dependencies & build
+Or set ENV variables:
+ - `PORT` - port on which the app should run (default: `3000`)
+ - `LOG_LEVEL` - log level for output logs (values: `trace, debug, info, warn, error, fatal` | default: `info`)
+ - `FFMPEG_PATH` - path to ffmpeg binary
+ - `FILL_AT_STARTUP` - fill redis cache at startup
+ - `REDIS_HOST` - redis instance host
+ - `REDIS_PASSWORD` - redis instance password
+
+Variables can be set also when running node server:
+```bash
+LOG_LEVEL=trace npm start
+```
+
+## Installing dependencies & build
 ```bash
 npm install
 npm run build
 ```
 
-## Startup
+When running without docker, one should have installed also ffmpeg for converting video files to mp3.
+ 
+
+## Running app
 ```bash
 npm start # start with prod env
-
-npm run start-dev-watch # start with dev env and watch for file changes
 ```  
 
 ## Dev
+Some commands which can get handy when running the app:
+
 ```bash
-npm run build-watch # build and watch for file changes
+npm run build-watch     # build and watch for file changes
+npm run start-dev-watch # start with dev env and watch for file changes
+
 npm test            # run tests unit & integration
 npm run coverage    # calculate coverage
+
 ```  
 
 ## TODOs
- - load config from env
  - improve internal logging
  - dockerize whole app
  - add better test coverage
@@ -53,4 +71,3 @@ npm run coverage    # calculate coverage
  - set up commit hooks (linting + plugins - eg. no-only-tests)
  - set up tools like mversion, commitizen, ..
  - types with typescript / flow?
- - cleanup

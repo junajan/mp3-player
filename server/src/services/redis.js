@@ -14,7 +14,7 @@ export default class RedisClient {
 	}
 
 	async set (key, val) {
+		// stringify in order to handle issues with storing arrays
 		return this.client.setAsync(key, JSON.stringify(val));
 	}
-
 }

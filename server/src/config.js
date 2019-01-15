@@ -1,10 +1,16 @@
+/**
+ * This file loads configuration from several sources.
+ * It works only for synchronous loading and shoudl be refactored
+ * if we want to fetch config from some remote sources
+ */
 import _ from 'lodash';
 import path from 'path';
+import * as constants from './constants';
+import defaultConfig from '../config/default.json';
 
 /**
  * Default configuration
  */
-import * as defaultConfig from '../config/default.json';
 const env = process.env.NODE_ENV || 'prod';
 
 /**
@@ -23,7 +29,7 @@ try {
 	// env config file does not exist or has an invalid structure
 	if (e.toString().includes('Unexpected token'))
 		throw new Error(
-			`Config file "${fileConfigPath}" contains an invalid JSON: ${e.toString()}`
+			`Config file "${fileConfigPath}" contains an invalid JSON structure: ${e.toString()}`
 		);
 }
 
@@ -31,14 +37,14 @@ try {
  * Environment configuration
  */
 const envConfig = {};
-const environmentVariableKeys = [
-	'PORT',
-	'LOG_LEVEL',
-];
 
-for (const key of environmentVariableKeys) {
+for (const [key, path] of Object.entries(constants.ENV_VARIABLES_MAP)) {
 	if (!_.isUndefined(process.env[key]))
-		envConfig[_.camelCase(key)] = process.env[key];
+		_.set(envConfig, path, process.env[key]);
 }
 
-export default _.defaultsDeep(envConfig, fileConfig, defaultConfig);
+const finalConfig = _.defaultsDeep(envConfig, fileConfig, defaultConfig);
+
+// sanitize port number
+finalConfig.port = parseInt(finalConfig.port, 10);
+export default finalConfig;

@@ -2,7 +2,7 @@
   "name": "mp3-player-server",
   "version": "0.1.0",
   "description": "Server for serving audio files",
-  "main": "dist/api.js",
+  "main": "dist/app.js",
   "scripts": {
     "build": "babel src -d dist",
     "build-watch": "babel --watch src -d dist",
@@ -15,6 +15,10 @@
     "test-unit": "./node_modules/.bin/mocha --compilers js:@babel/register --recursive spec/unit/**/*.spec.js",
     "test-integration": "n./node_modules/.bin/mocha --compilers js:@babel/register --recursive spec/integration/**/*.spec.js",
     "coverage": "mkdir -p .nyc_output && ./node_modules/.bin/nyc report --reporter=text --reporter=html npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/junajan/mp3-player.git"
   },
   "engines": {
     "node": ">=10.0.0",
@@ -37,10 +41,13 @@
   "dependencies": {
     "aws-sdk": "^2.387.0",
     "bluebird": "^3.5.3",
+    "eventemitter3": "^3.1.0",
     "express": "^4.16.4",
     "lodash": "^4.17.11",
+    "log4js": "^3.0.6",
     "redis": "^2.8.0",
     "require-dir": "^1.2.0",
+    "socket.io": "^2.2.0",
     "video-converter": "^1.0.0",
     "youtube-dl": "^1.12.2"
   }

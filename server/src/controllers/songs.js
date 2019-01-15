@@ -11,8 +11,6 @@ class SongsController extends event {
 
 	async getAll (req, res) {
 		let list = await this.model.getAll();
-		// map only info necessary info
-		list = list.map(({id, name, meta }) => ({ id, name, meta }));
 		return res.json(list);
 	}
 

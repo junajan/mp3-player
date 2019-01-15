@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "Lowland - Children",
+    "path": "lowland.mp3",
+    "meta": {
+      "length": 1234
+    }
+  },
+  {
+    "id": 2,
+    "name": "Avicii - Ten More Days",
+    "path": "avicii.mp3",
+    "meta": {
+      "length": 987
+    }
+  },
+  {
+    "id": 3,
+    "name": "Frontier Psychiatrist (youtube)",
+    "youtube": "qLrnkK2YEcE",
+    "meta": {
+      "length": 987
+    }
+  },
+  {
+    "id": 4,
+    "name": "The Rolling Stones - Sympathy For The Devil (Official Lyric Video)",
+    "youtube": "GgnClrx8N2k",
+    "meta": {
+      "length": 4567
+    }
+  },
+  {
+    "id": 5,
+    "name": "Sound of silence Disturbed legendado",
+    "youtube": "8j8095bdqIs",
+    "meta": {
+      "length": 2345
+    }
+  },
+  {
+    "id": 6,
+    "name": "The Eagle Rock Gospel Singers - Outta My Head | Suits Music 7x07",
+    "youtube": "moxridx8saQ",
+    "meta": {
+      "length": 9786
+    }
+  },
+  {
+    "id": 7,
+    "name": "Bruce Springsteen - Waitin' on a Sunny Day",
+    "youtube": "TiCxqhu9cio",
+    "meta": {
+      "length": 9876
+    }
+  }
+]

@@ -1,0 +1,47 @@
+{
+  "name": "mp3-player-server",
+  "version": "0.1.0",
+  "description": "Server for serving audio files",
+  "main": "dist/api.js",
+  "scripts": {
+    "build": "babel src -d dist",
+    "build-watch": "babel --watch src -d dist",
+    "start": "NODE_ENV=prod node bin/server",
+    "start-dev": "NODE_ENV=dev bin/server",
+    "start-dev-watch": "nodemon -x 'npm run start-dev'",
+    "lint": "./node_modules/.bin/eslint src",
+    "lint-watch": "./node_modules/.bin/nodemon --exec 'npm run lint'",
+    "test": "./node_modules/.bin/mocha --compilers js:@babel/register --recursive spec/**/*.spec.js",
+    "test-unit": "./node_modules/.bin/mocha --compilers js:@babel/register --recursive spec/unit/**/*.spec.js",
+    "test-integration": "n./node_modules/.bin/mocha --compilers js:@babel/register --recursive spec/integration/**/*.spec.js",
+    "coverage": "mkdir -p .nyc_output && ./node_modules/.bin/nyc report --reporter=text --reporter=html npm test"
+  },
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
+  },
+  "author": "Jan Juna <mail@janjuna.cz>",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/register": "^7.0.0",
+    "babel-plugin-istanbul": "^5.1.0",
+    "chai": "^4.2.0",
+    "eslint": "^5.12.0",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0",
+    "sinon": "^7.2.2"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.387.0",
+    "bluebird": "^3.5.3",
+    "express": "^4.16.4",
+    "lodash": "^4.17.11",
+    "redis": "^2.8.0",
+    "require-dir": "^1.2.0",
+    "video-converter": "^1.0.0",
+    "youtube-dl": "^1.12.2"
+  }
+}

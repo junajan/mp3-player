@@ -2,9 +2,9 @@ import _ from 'lodash';
 import sinon from 'sinon';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import { logger } from '../utils';
-import { name, version }  from '../../package';
-import ApiFactory  from '../../src/api';
+import { logger } from '../../utils';
+import { name, version }  from '../../../package';
+import ApiFactory  from '../../../src/api';
 
 const { expect } = chai
 

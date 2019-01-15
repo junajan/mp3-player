@@ -1,6 +1,6 @@
 import sinon from 'sinon'
 import { expect } from 'chai'
-import { SongsModel } from '../../src/models/songs'
+import { SongsModel } from '../../../src/models/songs'
 
 describe('Songs model', () => {
   const mockApp = { get: () => ({}) }

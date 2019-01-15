@@ -1,5 +1,7 @@
 # MP3 Player server
-Server side app which downloads songs from youtube, converts them to mp3 and serves them through API as MP3 files.
+Server side app which serves mp3 files.
+Application can also download songs from youtube, convert them to mp3 and then serve them through API as mp3 files.
+After the file is downloaded and converted to mp3, it is saved in a local cache so the server does not have to download it again.
 
 ## REST API Routes
 API provides following routes:

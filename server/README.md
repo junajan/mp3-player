@@ -10,7 +10,32 @@ API provides following routes:
  - `/songs/:id/info` - returns info about selected song 
  - `/songs/:id/file` - returns mp3 file of a selected song 
 
-## Config
+# Socket server
+Application creates also a socket server which emits two events:
+ - `common::time` - every second it emits current time in Unix time format
+ - `songs::download` - this event is emitted when somebody downloads the audio file
+
+## Running with docker
+The easiest way how to run the server is to create a docker image and run it inside of a container, see following commands:
+```
+# build docker image:
+docker build -t mp3-player-server/latest .
+
+# run server
+docker run -p=3000:3000 -e REDIS_HOST={redistAddress} -e REDIS_PASSWORD={redisPassword} -id -t mp3-player-server/latest
+
+# display running container
+docker ps
+
+# read logs (and follow)
+docker logs -f {containerId}
+
+# stop running container
+docker stop {containerId}
+```
+
+## Running without docker
+### Config
 Add `dev.env.json` or `prod.env.json` to `./config` folder with following config object:
 ```js
 {
@@ -37,22 +62,32 @@ Variables can be set also when running node server:
 LOG_LEVEL=trace npm start
 ```
 
-## Installing dependencies & build
+### Install dependencies & build
 ```bash
 npm install
 npm run build
 ```
 
-When running without docker, one should have installed also ffmpeg for converting video files to mp3.
- 
+**NOTE:** When running without docker, one should have installed also ffmpeg for converting video files to mp3.
 
-## Running app
+### Run the app
 ```bash
-npm start # start with prod env
+# start with prod env
+npm start
+
+# or install forever and run detached from terminal with watchdog
+npm i -g forever
+forever start -a --uid 'mp3-server' bin/server
+
+# list running services
+forever list
+
+# stop mp3-server service
+forever stop mp3-server
 ```  
 
-## Dev
-Some commands which can get handy when running the app:
+## Dev commands
+Some commands which can get handy during development:
 
 ```bash
 npm run build-watch     # build and watch for file changes
@@ -60,14 +95,14 @@ npm run start-dev-watch # start with dev env and watch for file changes
 
 npm test            # run tests unit & integration
 npm run coverage    # calculate coverage
-
 ```  
 
 ## TODOs
- - improve internal logging
- - dockerize whole app
+This app has many things which should be improved:   
  - add better test coverage
- - give some love to eslint errors
  - set up commit hooks (linting + plugins - eg. no-only-tests)
  - set up tools like mversion, commitizen, ..
  - types with typescript / flow?
+ - improve internal logging
+ - .. etc
+ 

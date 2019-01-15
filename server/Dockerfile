@@ -3,6 +3,9 @@ FROM mhart/alpine-node:10
 
 COPY --from=0 / /
 
+RUN apk --no-cache add python
+
+
 # Create app directory
 WORKDIR /app
 
@@ -12,8 +15,9 @@ RUN npm install
 RUN npm run build
 
 ENV PORT=3000
-ENV FFMPEG_PATH='/sbin/ffmpeg'
+ENV FFMPEG_PATH='/usr/local/bin/ffmpeg'
 
 EXPOSE 3000
+
 CMD [ "npm", "start" ]
 

@@ -34,7 +34,6 @@ describe('Songs routes', () => {
   let redisStub = null
   before(() => {
     const redis = server.get('services').redis
-
     redisStub = sinon.stub(redis, 'get')
       .returns(_.cloneDeep(mockData))
   })

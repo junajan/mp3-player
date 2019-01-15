@@ -15,7 +15,7 @@
     "test-watch": "./node_modules/.bin/nodemon --exec 'npm run test'",
     "test-unit": "./node_modules/.bin/mocha --compilers js:@babel/register --recursive spec/unit/**/*.spec.js",
     "test-integration": "n./node_modules/.bin/mocha --compilers js:@babel/register --recursive spec/integration/**/*.spec.js",
-    "coverage": "mkdir -p .nyc_output && ./node_modules/.bin/nyc report --reporter=text --reporter=html npm test"
+    "coverage": "mkdir -p .nyc_output && ./node_modules/.bin/nyc --reporter=text --reporter=html npm test"
   },
   "repository": {
     "type": "git",

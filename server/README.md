@@ -1,19 +1,19 @@
 # MP3 Player server
-Server side app which downloads songs from youtube, converts them to mp3 and serves them through API.
+Server side app which downloads songs from youtube, converts them to mp3 and serves them through API as MP3 files.
 
-## Routes
+## REST API Routes
 API provides following routes:
  - `/` - returns server name 
  - `/version` - returns version
- - `/ping` - health check ep for loadbalancer 
+ - `/ping` - health check endpoint for load balancer 
  - `/songs` - returns the list of all songs 
  - `/songs/:id/info` - returns info about selected song 
  - `/songs/:id/file` - returns mp3 file of a selected song 
 
-# Socket server
+## Socket server
 Application creates also a socket server which emits two events:
- - `common::time` - every second it emits current time in Unix time format
- - `songs::download` - this event is emitted when somebody downloads the audio file
+ - `common::time` - event emitted every second with a current timestamp in Unix time format
+ - `songs::download` - event emitted only when somebody downloads the audio file
 
 ## Running with docker
 The easiest way how to run the server is to create a docker image and run it inside of a container, see following commands:
@@ -49,7 +49,7 @@ Add `dev.env.json` or `prod.env.json` to `./config` folder with following config
 }
 ```
 
-Or set ENV variables:
+Or set `ENV` variables:
  - `PORT` - port on which the app should run (default: `3000`)
  - `LOG_LEVEL` - log level for output logs (values: `trace, debug, info, warn, error, fatal` | default: `info`)
  - `FFMPEG_PATH` - path to ffmpeg binary
@@ -94,12 +94,14 @@ npm run build-watch     # build and watch for file changes
 npm run start-dev-watch # start with dev env and watch for file changes
 
 npm test            # run tests unit & integration
+npm test-watch      # run tests and watches for changes
 npm run coverage    # calculate coverage
-```  
+```
 
 ## TODOs
 This app has many things which should be improved:   
  - add better test coverage
+ - add integration tests (use docker-compose to spin up the test environment)
  - set up commit hooks (linting + plugins - eg. no-only-tests)
  - set up tools like mversion, commitizen, ..
  - types with typescript / flow?

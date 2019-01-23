@@ -5,6 +5,6 @@ import songs from './songs';
  * Combine all routers
  */
 export default {
-	common,
-	songs,
+  common,
+  songs,
 };

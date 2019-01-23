@@ -4,44 +4,44 @@ import requireDir from 'require-dir';
 import apiRoutes from './routes';
 
 function connectServices(config, logger) {
-	// require all services from services dir
-	const serviceModules = requireDir('./services');
+  // require all services from services dir
+  const serviceModules = requireDir('./services');
 
-	// create service objects
-	return _.mapValues(serviceModules, (service, name) => {
-		logger.trace('Building service "%s"', name);
-		return new service.default(config, logger);
-	});
+  // create service objects
+  return _.mapValues(serviceModules, (service, name) => {
+    logger.trace('Building service "%s"', name);
+    return new service.default(config, logger);
+  });
 }
 
 function connectRoutes (api, routes, logger) {
-	Object.entries(routes).map(([name, route]) => {
-		const [prefix, router] = route;
+  Object.entries(routes).map(([name, route]) => {
+    const [prefix, router] = route;
 
-		logger.trace('Deploying "%s" with route prefix "%s"', name, prefix);
-		const routerModule = new router(api);
-		api.use(prefix, routerModule.getRoutes());
+    logger.trace('Deploying "%s" with route prefix "%s"', name, prefix);
+    const routerModule = new router(api);
+    api.use(prefix, routerModule.getRoutes());
 
-		return routerModule;
-	});
+    return routerModule;
+  });
 }
 
 export default function ApiFactory (config, logger) {
-	const api = express();
+  const api = express();
 
-	// Register API middlewares
-	api.use(logger.expressMiddleware);
-	api.use(express.json());
+  // Register API middlewares
+  api.use(logger.expressMiddleware);
+  api.use(express.json());
 
-	// Register common properties
-	api.set('port', config.port);
-	api.set('config', config);
+  // Register common properties
+  api.set('port', config.port);
+  api.set('config', config);
 
-	// Register services
-	api.set('services', connectServices(config, logger));
+  // Register services
+  api.set('services', connectServices(config, logger));
 
-	// Register API routes
-	connectRoutes(api, apiRoutes, logger);
+  // Register API routes
+  connectRoutes(api, apiRoutes, logger);
 
-	return api;
+  return api;
 }

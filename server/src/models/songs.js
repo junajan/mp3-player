@@ -60,7 +60,7 @@ export class SongsModel extends event {
       let fullPath = this._getCachedYoutubeSong(detail.youtube);
 
       if (!fullPath) {
-        this.emit('songs::youtubeConvert', detail)
+        this.emit('songs::youtubeConvert', detail);
         console.log('Downloading song from youtube:', detail.youtube);
         fullPath = await this.youtubeDownloader.download(detail.youtube);
         // cache downloaded file so we don't have to download it again

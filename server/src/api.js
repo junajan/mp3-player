@@ -32,8 +32,8 @@ export default function ApiFactory (config, logger) {
   const api = express();
 
   // Register API middlewares
-  api.use(helmet())
-  api.use(cors())
+  api.use(helmet());
+  api.use(cors());
   api.use(logger.expressMiddleware);
   api.use(express.json());
 

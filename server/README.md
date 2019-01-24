@@ -110,5 +110,6 @@ This app has many things which should be improved:
  - improve internal logging
  - use a remote storage of cached audio files so we can horizontally scale without duplicating audio files 
  - split to lambda functions
+ - set up properly CORS!
  - .. etc
  

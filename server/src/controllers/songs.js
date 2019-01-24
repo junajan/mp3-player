@@ -7,16 +7,34 @@ class SongsController extends event {
 
     this.app = app;
     this.model = SongsModel(app, app.get('config'));
+
+    // reregister events
+    ['songs::youtubeConvert'].map(
+      event => this.model.on(event, this.emit.bind(this, event))
+    )
+  }
+
+  _enrichWithSongUrlHoc (req) {
+    return (item) => ({
+      ...item,
+      sourceUrl: `${req.protocol}://${req.get('host')}/songs/${item.id}/file`
+    })
   }
 
   async getAll (req, res) {
+    const addSongUrl = this._enrichWithSongUrlHoc(req)
     let list = await this.model.getAll();
+
+    list = list.map(addSongUrl)
     return res.json(list);
   }
 
   async getInfo (req, res, next) {
+    const addSongUrl = this._enrichWithSongUrlHoc(req)
     const songId = parseInt(req.params.id, 10);
-    const detail = await this.model.getInfo(songId);
+    let detail = await this.model.getInfo(songId);
+
+    detail = addSongUrl(detail)
 
     return detail
       ? res.json(detail)

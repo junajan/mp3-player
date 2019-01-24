@@ -2,6 +2,16 @@
   "name": "mp3-player-server",
   "version": "1.0.0",
   "description": "Server for serving audio files",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/junajan/mp3-player.git"
+  },
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
+  },
+  "author": "Jan Juna <mail@janjuna.cz>",
+  "license": "ISC",
   "main": "dist/app.js",
   "scripts": {
     "build": "babel src -d dist",
@@ -17,16 +27,6 @@
     "test-integration": "n./node_modules/.bin/mocha --compilers js:@babel/register --recursive spec/integration/**/*.spec.js",
     "coverage": "mkdir -p .nyc_output && ./node_modules/.bin/nyc --reporter=text --reporter=html npm test"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/junajan/mp3-player.git"
-  },
-  "engines": {
-    "node": ">=10.0.0",
-    "npm": ">=6.0.0"
-  },
-  "author": "Jan Juna <mail@janjuna.cz>",
-  "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
@@ -43,10 +43,13 @@
     "aws-sdk": "^2.387.0",
     "bluebird": "^3.5.3",
     "chai-http": "^4.2.1",
+    "cors": "^2.8.5",
     "eventemitter3": "^3.1.0",
     "express": "^4.16.4",
+    "helmet": "^3.15.0",
     "lodash": "^4.17.11",
     "log4js": "^3.0.6",
+    "react-audio-player": "^0.11.0",
     "redis": "^2.8.0",
     "require-dir": "^1.2.0",
     "socket.io": "^2.2.0",

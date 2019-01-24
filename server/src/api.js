@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import express from 'express';
 import requireDir from 'require-dir';
+import cors from 'cors';
+import helmet from 'helmet';
 import apiRoutes from './routes';
 
 function connectServices(config, logger) {
@@ -30,6 +32,8 @@ export default function ApiFactory (config, logger) {
   const api = express();
 
   // Register API middlewares
+  api.use(helmet())
+  api.use(cors())
   api.use(logger.expressMiddleware);
   api.use(express.json());
 
@@ -39,9 +43,14 @@ export default function ApiFactory (config, logger) {
 
   // Register services
   api.set('services', connectServices(config, logger));
-
   // Register API routes
   connectRoutes(api, apiRoutes, logger);
+
+  api.use((req, res) => {
+    res.status(404).json({
+      error: 'Requested page was not found'
+    });
+  });
 
   return api;
 }

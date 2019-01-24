@@ -1,9 +1,12 @@
 import path from 'path';
+import event from 'eventemitter3';
 import YoutubeDownloader from '../services/youtubeDownloader';
 import mockSongs from '../../resources/songs.json';
 
-export class SongsModel{
-  constructor(app, config) {
+export class SongsModel extends event {
+  constructor (app, config) {
+    super();
+
     this.songDir = 'resources/songs/';
     this.youtubeDownloader = new YoutubeDownloader(config);
     this.redisClient = this._getRedisClient(app);
@@ -57,6 +60,7 @@ export class SongsModel{
       let fullPath = this._getCachedYoutubeSong(detail.youtube);
 
       if (!fullPath) {
+        this.emit('songs::youtubeConvert', detail)
         console.log('Downloading song from youtube:', detail.youtube);
         fullPath = await this.youtubeDownloader.download(detail.youtube);
         // cache downloaded file so we don't have to download it again

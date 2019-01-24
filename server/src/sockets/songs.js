@@ -20,7 +20,11 @@ export default class SongsSocket {
    */
   _registerBroadcasts () {
     this.songsController.on('songs::download', ({ id, name }) => {
-      this.io.emit('songs::download', { id, name });
+      this.io.emit('songs::download', { id, name, createdAt: +new Date() });
+    });
+
+    this.songsController.on('songs::youtubeConvert', ({ id, name }) => {
+      this.io.emit('songs::youtubeConvert', { id, name, createdAt: +new Date() });
     });
   }
 

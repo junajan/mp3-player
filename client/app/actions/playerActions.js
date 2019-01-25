@@ -23,7 +23,8 @@ export const playSong = payload => ({
 export function fetchSongs() {
   return {
     type: 'FETCH_SONGS',
-    payload: axios.get(SONGS_URL)
+    payload: axios
+      .get(SONGS_URL)
       .then(res => res.data)
       .then(resJson => {
         if (resJson.error) throw new Error(resJson.error);

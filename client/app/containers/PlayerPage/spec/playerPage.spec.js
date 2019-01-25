@@ -21,15 +21,14 @@ describe('PlayerPage', () => {
       },
     });
 
-    const wrapper = mount(
+    mount(
       <Provider store={store}>
         <PlayerPage />
-      </Provider>
+      </Provider>,
     );
 
     expect(getSpy).toBeCalled();
   });
-
 
   // TODO add tests for page elements, rejected request, ...
 });

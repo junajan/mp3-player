@@ -13,9 +13,10 @@ const SongIcon = isPaused => (isPaused ? <PauseIcon /> : <PlayIcon />);
 
 const SongItem = props => {
   const { classes, item, activeItem, isPaused, onClick } = props;
+  const activeId = activeItem ? activeItem.id : null;
   return (
     <ListItem onClick={onClick}>
-      {activeItem && activeItem.id === item.id && ( // eslint-disable-line
+      {activeId === item.id && ( // eslint-disable-line
         <ListItemIcon className={classes.icon}>
           {SongIcon(isPaused)}
         </ListItemIcon>

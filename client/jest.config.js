@@ -15,8 +15,9 @@ module.exports = {
       lines: 98,
     },
   },
+  setupTestFrameworkScriptFile: './utils/setupTests.js',
   moduleDirectories: ['node_modules', 'app'],
   moduleNameMapper: {},
-  testRegex: 'tests/.*\\.test\\.js$',
+  testRegex: '.*/spec/.*\\.spec\\.js$',
   snapshotSerializers: ['enzyme-to-json/serializer'],
 };

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import {
   FETCH_SONGS_PENDING,
   FETCH_SONGS_FULFILLED,
@@ -18,7 +19,7 @@ function playerReducer(state = init, action) {
     case PLAY_SONG:
       return {
         ...state,
-        activeItem: action.payload,
+        activeItem: _.pick(action.payload, ['id', 'name', 'sourceUrl']),
       };
     case FETCH_SONGS_PENDING:
       return {

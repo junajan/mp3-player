@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Error404 page should display error message 1`] = `
+<div>
+  <WithStyles(Typography)
+    component="h2"
+    variant="h3"
+  >
+    Error 404
+  </WithStyles(Typography)>
+  <br />
+  <WithStyles(Typography)
+    variant="subtitle2"
+  >
+    The requested page was not found ..
+    <br />
+    Here you can go to the 
+    <Link
+      replace={false}
+      to="/"
+    >
+      homepage
+    </Link>
+    .
+  </WithStyles(Typography)>
+</div>
+`;

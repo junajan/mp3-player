@@ -18,7 +18,7 @@ const ErrorBox = props => {
         message={
           <span className={classes.message}>
             <ErrorIcon className={classes.iconVariant} />
-            {message}
+            <span className="error-message">{message}</span>
           </span>
         }
         action={[

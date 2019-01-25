@@ -9,7 +9,6 @@ import PlayerPage from '../PlayerPage';
 import NotFoundPage from '../NotFoundPage';
 
 import styles from './styles';
-
 const App = props => {
   const { classes } = props;
   return (

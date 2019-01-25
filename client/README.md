@@ -3,6 +3,8 @@ Mp3 web player written in React together with [Material-UI](https://material-ui.
 When starting, the player downloads a list of all songs from the [backend service](../server/) and play them using `react-audio-player` plugin.
 It also streams server events (`song download` and `youtube video to mp3 file conversion`).
 
+NOTE: This app was created from [react-boilerplate](https://github.com/react-boilerplate/react-boilerplate).
+
 ## Configuration
 There are two environment variables (see [defaults](./.env.base)):
  - `NODE_ENV` - environment type (default: `production`)

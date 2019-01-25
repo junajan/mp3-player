@@ -1,4 +1,4 @@
-import fetch from 'cross-fetch';
+import axios from 'axios';
 
 const SONGS_URL = `${process.env.API_URL}/songs`;
 
@@ -23,8 +23,8 @@ export const playSong = payload => ({
 export function fetchSongs() {
   return {
     type: 'FETCH_SONGS',
-    payload: fetch(SONGS_URL)
-      .then(res => res.json())
+    payload: axios.get(SONGS_URL)
+      .then(res => res.data)
       .then(resJson => {
         if (resJson.error) throw new Error(resJson.error);
         return resJson;

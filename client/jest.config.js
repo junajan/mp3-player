@@ -15,6 +15,7 @@ module.exports = {
       lines: 98,
     },
   },
+  clearMocks: true,
   setupTestFrameworkScriptFile: './utils/setupTests.js',
   moduleDirectories: ['node_modules', 'app'],
   moduleNameMapper: {},

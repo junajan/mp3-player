@@ -34,7 +34,9 @@ const PlayerPage = props => {
   };
 
   const onPlayClick = item => {
-    dispatch(playSong(item));
+    // play song only if it is not active
+    if (!activeItem || activeItem.id !== item.id)
+      dispatch(playSong(item));
   };
 
   const onNewLogEntry = eventName => item => {

@@ -17,9 +17,25 @@ Application creates also a socket server which emits two events:
  - `common::time` - event emitted every second with a current timestamp in Unix time format
  - `songs::download` - event emitted only when somebody downloads the audio file
 
-## Running with docker
-The easiest way how to run the server is to create a docker image and run it inside of a container, see following commands:
+## Running with docker-compose
+The easies way how to run the backend service is using `docker-compose` using following commands:
+```bash
+# start backend service on port 4000
+REDIS_HOST={redistAddress} -e REDIS_PASSWORD={redisPassword} docker-compose up -d
+
+# list running service
+docker-compose ps
+
+# show logs
+docker-compose logs
+
+# stop running service
+docker-compose stop
 ```
+
+## Running with docker
+Another way how to run the server is to create a docker image and run it inside of a container, see following commands:
+```bash
 # build docker image:
 docker build -t mp3-player-server/latest .
 

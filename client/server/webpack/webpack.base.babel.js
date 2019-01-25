@@ -14,7 +14,7 @@ const baseConfig = getEnvConfig(baseConfigPath);
 const reactEnvVariables = Object.entries(baseConfig).reduce(
   (all, [key, val]) => ({
     ...all,
-    [key]: JSON.stringify(val),
+    [key]: JSON.stringify(process.env[key] || val),
   }),
   {},
 );

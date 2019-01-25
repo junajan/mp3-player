@@ -61,5 +61,7 @@ This app has many things which should be improved:
  - add types with typescript / flow
  - improve internal logging
  - improve build size
+ - Better separation of deps and devDeps
+ - add E2E tests with cypress
  - .. etc
  

@@ -11,6 +11,11 @@ const { expect } = chai
 chai.use(chaiHttp);
 
 describe('Songs routes', () => {
+  const entrichItemWithSourceUrl = ({ protocol, host }) => item => ({
+    ...item,
+    sourceUrl: `${protocol}//${host}/songs/${item.id}/file`,
+  });
+
   const mockData = [
     {
       "id": 1,
@@ -46,13 +51,18 @@ describe('Songs routes', () => {
     const res = await chai.request(server)
       .get('/songs/')
 
-    expect(res.body).to.deep.equal(mockData)
+    const enrichItem = entrichItemWithSourceUrl(res.request)
+    const expected = mockData.map(enrichItem);
+
+    expect(res.body).to.deep.equal(expected)
   });
 
   it('it should GET /songs/1/info', async () => {
     const res = await chai.request(server)
       .get('/songs/1/info')
 
-    expect(res.body).to.deep.equal(mockData[0])
+    const enrichItem = entrichItemWithSourceUrl(res.request)
+    const expected = enrichItem(mockData[0]);
+    expect(res.body).to.deep.equal(expected)
   });
 });
